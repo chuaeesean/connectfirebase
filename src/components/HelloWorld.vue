@@ -16,7 +16,7 @@
           <center>
           <div class="justify-content-md-center">
                   <div class="justify-content-md-center" v-for="collectionGroupData in collectionGroupDatas" :key="collectionGroupData.id">
-                  <div style="width: 40%; cursor:pointer;" class="card m-2 justify-content-start">
+                  <div style="width: 80%; cursor:pointer;" class="card m-2 justify-content-start">
                       <div class="card card-header">
                         <div class="row">
                             <div style="text-align: left;" class="col">
@@ -30,17 +30,25 @@
                                 <button v-else @click="changeNameView = !collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id, changeView()" class="btn btn-light">
                                     <i class="fa-duotone fa-lock"/>
                                 </button>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="card card-body">
+                        <div class="row">
+                            <div class="col">
                                 <button @click="$router.push(collectionGroupData.link)" class="btn btn-light">
                                     <i class="fa-duotone fa-folder-open"/>
                                 </button>
+                            </div>
+                            <div class="col">
+                                <a class="link-dark" @click="$router.push(collectionGroupData.link)" v-text="collectionGroupData.id" />
+                            </div>
+                            <div class="col">
                                 <button @click="openDeletePage(collectionGroupData.deleteLink)" class="btn btn-outline-danger">
                                     <i class="fa-duotone fa-trash" />
                                 </button>
                             </div>
                         </div>
-                      </div>
-                      <div class="card card-body">
-                        <a class="link-dark" @click="$router.push(collectionGroupData.link)" v-text="collectionGroupData.id" />
                       </div>
                   </div>
               </div>

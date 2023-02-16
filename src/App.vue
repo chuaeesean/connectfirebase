@@ -60,7 +60,7 @@
       </div>
     </div>
     <router-view style="margin-top: 3%" />
-</div>
+  </div>
 </template>
 
 <script>

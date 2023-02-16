@@ -16,7 +16,7 @@
         </div>
         <div class="row mt-4">
             <center>
-            <button @click="createGroup()" style="width:10%;" class="btn btn-success">
+            <button @click="createGroup()" style="width:100pt;" class="btn btn-success">
                 Create
             </button>
             </center>
