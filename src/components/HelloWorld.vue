@@ -20,9 +20,16 @@
                       <div class="card card-header">
                         <div class="row">
                             <div style="text-align: left;" class="col">
-                                <h5 style="font-weight: bold" v-text="collectionGroupData.name"/>
+                                <h5 @click="changeNameView = collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id, changeName()" style="font-weight: bold; font-family: Avenir, Helvetica, Arial, sans-serif;" v-text="collectionGroupData.name"/>
                             </div>
                             <div style="text-align: right;" class="col">
+                                <button v-if="collectionGroupData.view" @click="changeNameView = !collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id, changeView()" class="btn btn-light">
+                                    <i class="fa-duotone fa-eye"/>
+                                    {{  collectionGroupData.view  }}
+                                </button>
+                                <button v-else @click="changeNameView = !collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id, changeView()" class="btn btn-light">
+                                    <i class="fa-duotone fa-lock"/>
+                                </button>
                                 <button @click="$router.push(collectionGroupData.link)" class="btn btn-light">
                                     <i class="fa-duotone fa-folder-open"/>
                                 </button>
@@ -51,11 +58,45 @@ name: 'HelloWorld',
       loginInfo: false,
       signOut: true,
       userEmail: "",
-      collectionGroupDatas: []
+      collectionGroupDatas: [],
+      changeNameData: "",
+      changeNameID: "",
+      changeNameView: "",
   }),
   methods: {
     openDeletePage(item) {
         window.open(item, "deletePage", "height=700,width=700")
+    },
+    changeName() {
+        let newValue = window.prompt("Enter a new name to replace the following group: "+this.changeNameData+" - "+this.changeNameID)
+        if (newValue !== null) {
+            let setData = {
+                name: newValue,
+                group: true,
+                view: this.changeNameView,
+                createdEmail: this.userEmail
+            }
+            firebase.firestore().collection("markGroup").doc(this.changeNameID).set(setData)
+            setTimeout(() => {
+                this.changeNameData = ""
+                this.changeNameID = ""
+                this.changeNameView = ""
+            }, 500)
+        }
+    },
+    changeView() {
+            let setData = {
+                name: this.changeNameData,
+                group: true,
+                view: this.changeNameView,
+                createdEmail: this.userEmail
+            }
+            firebase.firestore().collection("markGroup").doc(this.changeNameID).set(setData)
+            setTimeout(() => {
+                this.changeNameData = ""
+                this.changeNameID = ""
+                this.changeNameView = ""
+            }, 500)
     }
   },
   created() {
@@ -70,6 +111,7 @@ name: 'HelloWorld',
                     let dataPush = {
                         name: data.data().name,
                         email: data.data().createdEmail,
+                        view: data.data().view,
                         id: data.id,
                         link: "/group#"+data.id,
                         deleteLink: "/deletegroup#"+data.id
