@@ -5,6 +5,7 @@ import rootPage from '../views/rootPage.vue'
 import addUser from '../views/addUser.vue'
 import deleteGroup from '../views/deleteGroup.vue'
 import newGroup from '../views/newGroup.vue'
+import viewData from '../views/viewData.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/deletegroup',
     name: 'deleteGroup',
     component: deleteGroup
+  },
+  {
+    path: '/view',
+    name: 'viewData',
+    component: viewData
   }
 ]
 

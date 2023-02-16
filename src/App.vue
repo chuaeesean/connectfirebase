@@ -55,6 +55,8 @@
           <button @click="$router.push('/about')" v-if="$route.fullPath === '/about'" type="button" style="width: 100%"
           class="btn btn-primary">About</button>
         <button @click="$router.push('/about')" v-else type="button" style="width: 100%" class="btn btn-light">About</button>
+        <button @click="openViewMode()" v-show="$route.path === '/group'" type="button" style="width: 100%" class="btn btn-light">Open in view mode</button>
+        <button @click="openGroupMode()" v-show="$route.path === '/view'" type="button" style="width: 100%" class="btn btn-light">Open in group mode</button>
       </div>
     </div>
     <router-view style="margin-top: 3%" />
@@ -94,6 +96,12 @@ export default {
     },
     backHome() {
       this.$router.push("/")
+    },
+    openViewMode() {
+      this.$router.push("/view"+this.$route.hash)
+    },
+    openGroupMode() {
+      this.$router.push("/group"+this.$route.hash)
     }
   },
   created() {
