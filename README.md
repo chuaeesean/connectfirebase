@@ -1,6 +1,6 @@
 # connectfirebase
 
-## Version 0.1.5 Update Release Notes
+## Version 0.1.4 Update Release Notes
 ### Updated Mobile Experience
 We had removed the old button method on the main page and use the select and dropdown method, making the mainpage group view more better for mobile devices to press. 
 
