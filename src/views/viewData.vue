@@ -7,7 +7,10 @@
                     The content is locked & protected from others to view. 
                 </div>
                 <div v-else>
-                    <button @click="copyLink()" class="btn btn-primary btn-sm m-1">
+                    <button v-if="linkCopiedBtn" class="btn btn-success btn-sm m-1">
+                        Link Copied!
+                    </button>
+                    <button v-else @click="copyLink()" class="btn btn-primary btn-sm m-1">
                         Copy Link
                     </button>
                     <button @click="shareLink()" class="btn btn-light btn-sm">
@@ -53,21 +56,23 @@ export default {
         contentViewable: true,
         contentLocked: false,
         groupName: "",
-        viewLink: ""
+        viewLink: "",
+        linkCopiedBtn: false,
     }),
     methods: {
         copyLink() {
                 let writeValue = "https://caller-record.web.app" + this.$route.fullPath
                 navigator.clipboard.writeText(writeValue)
+                this.linkCopiedBtn = true
+                setTimeout(() => {
+                    this.linkCopiedBtn = false
+                }, 1500)
         },
         shareLink() {
-                let shareContent = {
+                navigator.share({
                     url: "https://caller-record.web.app" + this.$route.fullPath,
                     title: this.groupName,
                     text: "Take a look on this group's data. "
-                }
-                navigator.share(shareContent).catch((e) => {
-                    alert(e)
                 })
         }
     },

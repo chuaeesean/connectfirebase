@@ -6,7 +6,7 @@
           data-bs-target="#menuOffcanva" aria-controls="menuOffcanva">
           <i class="fas fa-lg fa-bars" />
         </button>
-        <button @click="$router.push('/')" class="btn btn-light btn-lg" type="button">
+        <button id="homeBtn" @click="$router.push('/')" class="btn btn-light btn-lg" type="button">
           connectFirebase
         </button>
         <div class="d-flex">
@@ -124,7 +124,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'JetBrains Mono', monospace;
   -webkit-font-smoothing: antialiased;
@@ -133,4 +133,28 @@ export default {
   color: #2c3e50;
   
 };
+
+@media screen and (min-width: 376px) {
+  #homeBtn {
+    display: block
+  };
+  #welcomeText {
+    display: block
+  };
+  #projectText {
+    display: none
+  }
+};
+
+@media screen and (max-width: 375px) {
+  #homeBtn {
+    display: none;
+  };
+  #welcomeText {
+    display: none;
+  };
+  #projectText {
+    display: block;
+  }
+}
 </style>

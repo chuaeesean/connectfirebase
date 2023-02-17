@@ -1,24 +1,12 @@
 # connectfirebase
 
-## Project setup
-```
-npm install
-```
+## Version 0.1.5 Update Release Notes
+### Updated Mobile Experience
+We had removed the old button method on the main page and use the select and dropdown method, making the mainpage group view more better for mobile devices to press. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Bugs Fixes
+We have improved the view on small-screen devices. 
 
-### Compiles and minifies for production
 ```
-npm run build
+Last Updated: 17/2/2023
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
