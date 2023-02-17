@@ -6,6 +6,9 @@ import addUser from '../views/addUser.vue'
 import deleteGroup from '../views/deleteGroup.vue'
 import newGroup from '../views/newGroup.vue'
 import viewData from '../views/viewData.vue'
+import printView from '../views/printView.vue'
+import notFoundView from '../views/notFound.vue'
+import excelView from '../views/excelView.vue'
 
 Vue.use(VueRouter)
 
@@ -23,10 +26,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import('../views/AboutView.vue')
   },
   {
     path: '/group',
@@ -47,6 +47,21 @@ const routes = [
     path: '/view',
     name: 'viewData',
     component: viewData
+  },
+  {
+    path: '/print',
+    name: 'printData',
+    component: printView
+  },
+  {
+    path: '/excel',
+    name: 'excelView',
+    component: excelView
+  },
+  {
+    path: '*',
+    name: 'notFound',
+    component: notFoundView
   }
 ]
 

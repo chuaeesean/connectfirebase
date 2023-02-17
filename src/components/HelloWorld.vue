@@ -24,7 +24,9 @@
                     </button>
                     <ul v-if="selected" class="dropdown-menu">
                         <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a class="dropdown-item" @click="$router.push(selectedLink)">Open</a></li>
-                        <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a class="dropdown-item" @click="openDeletePage(selectedDeleteLink)">Delete</a></li>
+                        <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a class="dropdown-item" @click="openWindow(selectedDeleteLink)">Delete</a></li>
+                        <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a class="dropdown-item" @click="openWindow(selectedPrintLink)">Print</a></li>
+                        <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a class="dropdown-item" @click="openWindow('/excel#'+changeNameID)">Export</a></li>
                         <li style="font-family: Avenir, Helvetica, Arial, sans-serif;" v-if="changeNameView"><a @click="changeNameView = false, changeView()" class="dropdown-item">Set Group Protected</a></li>
                         <li style="font-family: Avenir, Helvetica, Arial, sans-serif;" v-else><a @click="changeNameView = true, changeView()" class="dropdown-item" >Set Group Visible</a></li>
                         <li style="font-family: Avenir, Helvetica, Arial, sans-serif;"><a @click="clearSelectedData" class="dropdown-item" >Cancel Selection</a></li>
@@ -46,7 +48,7 @@
                                             v-text="collectionGroupData.name" />
                                     </div>
                                     <div style="text-align: right;" class="col">
-                                        <button @click="selected = true,selectedLink = collectionGroupData.link, selectedDeleteLink = collectionGroupData.deleteLink,changeNameView = collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id" class="btn btn-light">
+                                        <button @click="selected = true,selectedLink = collectionGroupData.link, selectedDeleteLink = collectionGroupData.deleteLink, selectedPrintLink = collectionGroupData.printLink, changeNameView = collectionGroupData.view, changeNameData = collectionGroupData.name, changeNameID = collectionGroupData.id" class="btn btn-light">
                                             <i class="fa-duotone fa-square-check" />
                                         </button>
                                     </div>
@@ -82,10 +84,11 @@ export default {
         changeNameView: "",
         selected: false,
         selectedLink: "",
-        selectedDeleteLink: ""
+        selectedDeleteLink: "",
+        selectedPrintLink: ""
     }),
     methods: {
-        openDeletePage(item) {
+        openWindow(item) {
             window.open(item, "deletePage", "height=700,width=700")
         },
         changeName() {
@@ -138,6 +141,7 @@ export default {
                             view: data.data().view,
                             id: data.id,
                             link: "/group#" + data.id,
+                            printLink: "/print#"+data.id,
                             deleteLink: "/deletegroup#" + data.id
                         }
 

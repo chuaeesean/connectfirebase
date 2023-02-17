@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div style="width: 100%" v-if="$route.path !== '/print'" v-show="$route.path !== '/excel'">
     <nav v-if="$route.path !== '/adduser'" v-show="$route.path !== '/deletegroup'" class="navbar navbar-expand-xxl navbar-light justify-content-md-center bg-light">
       <div style="height: 30pt" class="container align-content-center">
         <button id="menuBtn" class="btn btn-light btn-lg navbar-brand" type="button" data-bs-toggle="offcanvas"
@@ -39,6 +40,7 @@
         </div>
       </div>
     </nav>
+    </div>
     <div class="offcanvas offcanvas-start" id="menuOffcanva" tabindex="-1" aria-labelledby="menuOffcanva">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>

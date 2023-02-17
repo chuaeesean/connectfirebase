@@ -1,7 +1,21 @@
 <template>
     <div class="container justify-content-md-center">
-        <div class="container" v-if="contentViewable">
+        <div class="container" v-if="notFound">
+            <div class="container justify-content-md-center m-3">
+                <i class="fa-duotone fa-file-xmark fa-10x" />
+            </div>
+            <div class="container justify-content-md-center m-2">
+                <h3>Error 404 Not Found</h3>
+            </div>
+            <div class="container justify-content-md-center m-2">
+                <p>The current page isn't available in this server.</p>
+            </div>
+        </div>
+        <div class="container" v-else-if="contentViewable">
             <div class="container justify-content-md-center">
+                <div class="container">
+                    <p><a id="link" @click="$router.push('/')">groups</a> / <a style="cursor: pointer">{{ groupName }}</a></p>
+                </div>
                 <button v-if="contentEditable" @click="addData()" type="button" class="btn btn-primary btn-sm">
                     Add user
                 </button>
@@ -71,6 +85,7 @@ export default {
         currentUserEmail: "",
         contentViewable: true,
         contentEditable: true,
+        groupName: "",
         addUser: "",
         saveUserBtnText: "Add user",
         btnDisabled: false,
@@ -79,12 +94,16 @@ export default {
         deleteName: "",
         editID: "",
         editName: "",
-        editMarks: 0
+        editMarks: 0,
+        notFound: false,
+        noData: false,
     }),
     methods: {
         getData() {
             let Route = this.$route.hash
             firebase.firestore().collection("markRecord").where("group", "==", Route).onSnapshot((querySnap) => {
+                console.log(querySnap)
+                
                 this.recordDatas = []
                 querySnap.forEach((data) => {
                     let dataPush = {
@@ -164,6 +183,12 @@ export default {
         userCheck() {
             let Hash = this.$route.hash.split("#").join("")
             firebase.firestore().collection("markGroup").doc(Hash).get().then((result) => {
+                if (result.exists === false) {
+                    this.notFound = true
+                }
+                else {
+                    this.groupName = result.data().name
+                }
                 if (result.data().createdEmail !== this.currentUserEmail) {
                     this.contentEditable = false
                     if (result.data().view !== true) {
@@ -216,5 +241,16 @@ export default {
 #cardBody:hover #deleteBtn {
     visibility: visible;
     transition: 100ms;
+}
+
+#link {
+    border-bottom: unset;
+    transition: 100ms;
+    cursor: pointer
+}
+
+#link:hover {
+    border-bottom: 1pt solid black;
+    transition: 100ms
 }
 </style>

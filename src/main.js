@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import firebase from "firebase/app";
 import store from './store'
+import excel from 'vue-excel-export'
+ 
+Vue.use(excel)
 
 const firebaseConfig = {
     apiKey: "AIzaSyBzCrf8p2o_Yv9Ab-QJFfzeXwvTFiwMtKc",
@@ -21,5 +24,6 @@ new Vue({
   router,
   firebaseConfig,
   store,
+  excel,
   render: h => h(App)
 }).$mount('#app')

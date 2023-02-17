@@ -1,11 +1,14 @@
 # connectfirebase
 
 ## Version 0.1.5 Update Release Notes
-### Updated Mobile Experience
-We had removed the old button method on the main page and use the select and dropdown method, making the mainpage group view more better for mobile devices to press. 
+### Print group records
+We have added the print function on the main page option selections, and user can now directly print out the group records. 
+
+### Save as Excel(.xls and .csv format)
+We have added the ability of the save to excel formats funcion. Same with the print function, user also can activate the excel function in the main page. 
 
 ### Bugs Fixes
-We have improved the view on small-screen devices. 
+Bug fixes on the 404-page error. 
 
 ```
 Last Updated: 17/2/2023

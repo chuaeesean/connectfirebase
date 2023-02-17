@@ -12,6 +12,7 @@
     "firebase": "^8.10.0",
     "firebase-tools": "^11.23.1",
     "vue": "^2.6.14",
+    "vue-excel-export": "^0.1.3",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
