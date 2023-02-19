@@ -73,6 +73,7 @@ export default {
         viewLink: "",
         linkCopiedBtn: false,
         notFound: false,
+        groupCreatedEmail: ""
     }),
     methods: {
         copyLink() {
@@ -106,6 +107,7 @@ export default {
                 }
                 this.groupName = data.data().name
                 this.viewLink = this.$route.fullPath
+                this.groupCreatedEmail = data.data().createdEmail
                 if (data.data().view === false) {
                     this.contentLocked = true
                     if (data.data().createdEmail !== this.userEmail) {
