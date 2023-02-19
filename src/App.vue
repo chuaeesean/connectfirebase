@@ -11,7 +11,7 @@
           connectFirebase
         </button>
         <div class="d-flex">
-          <button v-show="logout" @click="login()" class="btn btn-outline-primary btn-lg" :disabled="processingLogin"
+          <button v-show="logout" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#accountModal" :disabled="processingLogin"
             type="button">
             <div v-if="processingLogin" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
@@ -25,11 +25,26 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="accountModalLabel">Account</h5>
+                  <h5 v-if="loginInfo" class="modal-title" id="accountModalLabel">Account</h5>
+                  <h5 v-else class="modal-title" id="accountModalLabel">Login with</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div v-if="loginInfo" class="modal-body">
                   Username: {{ currentUsername }} - {{ currentEmail }}
+                </div>
+                <div v-else>
+                  <button class="btn btn-outline-primary btn-lg" @click="login()" >
+                    <i class="fa-brands fa-google" />
+                    Google
+                  </button>
+                  <button v-if="githubLoginError === false" class="btn btn-outline-secondary btn-lg m-1" @click="githubLogin()" >
+                    <i class="fa-brands fa-github" />
+                    Github
+                  </button>
+                  <div class="row">
+                    <p v-if="githubLoginError" style="color: red; font-weight: 400;">The current Github Account Email had already login with a Google Account with same email. Please use that Google Account to continue. </p>
+                    <p v-else style="opacity: 80%">Users who have logged in with a Google account will not be able to log in with a Github account with the same email address.</p>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button v-show="loginInfo" @click="signOut()" class="btn btn-outline-success btn-lg">Logout</button>
@@ -74,7 +89,8 @@ export default {
     processingLogin: false,
     currentEmail: "",
     currentUsername: "",
-    currentImageUrl: ""
+    currentImageUrl: "",
+    githubLoginError: false,
   }),
   methods: {
     login() {
@@ -89,6 +105,24 @@ export default {
       })
         .catch((e) => {
           console.warn(e)
+          this.processingLogin = false
+        })
+    },
+    githubLogin() {
+      this.processingLogin = true
+      let googleProvider = new firebase.auth.GithubAuthProvider
+      firebase.auth().signInWithPopup(googleProvider).then(() => {
+        this.loginInfo = true
+        this.logout = false
+        if (this.$route.hash !== '') {
+          this.$router.push("/group" + this.$route.hash)
+        }
+      })
+        .catch((e) => {
+          console.warn(e)
+          if (e.code === "auth/account-exists-with-different-credential") {
+            this.githubLoginError = true
+          }
           this.processingLogin = false
         })
     },

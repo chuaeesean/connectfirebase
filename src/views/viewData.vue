@@ -55,6 +55,9 @@
                 <p>Please contact the owner of the group. </p>
             </div>
         </div>
+        <div class="row" style="padding-top: 20pt;">
+            <p style="opacity: 70%; font-size: small;" v-text="'Group created by: '+groupCreatedEmail" />
+        </div>
 </div>
 </template>
 
