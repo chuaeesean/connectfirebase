@@ -1,15 +1,12 @@
 # connectfirebase
 
-## Version 0.1.5 Update Release Notes
-### Print group records
-We have added the ability of priting records. User can access them on the main page. 
+## Version 0.1.6 Update Release Notes
+### Github Login Supported
+Users can now login with their own Github Account. However they should login with the Github Account which is not the same with the Google Account email they had login before. 
 
-### Save Excel records
-We have also added the ability of saving records to Excel. User can save records to .xls and .csv excel format. 
-
-### Bugs Fixes
-Bug fixes on the 404-page error. 
+### Showing Group Creator's email
+Users can now view the group's creator email, whatever they're visible or locked from the public. 
 
 ```
-Last Updated: 17/2/2023
+Last Updated: 19/2/2023
 ```
