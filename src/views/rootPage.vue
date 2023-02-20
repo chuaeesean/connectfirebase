@@ -110,12 +110,22 @@ export default {
                 
                 this.recordDatas = []
                 querySnap.forEach((data) => {
-                    let dataPush = {
-                        id: data.id,
-                        name: data.data().name,
-                        marks: data.data().marks,
+                    if (isNaN(data.data().marks)) {
+                        let dataPush = {
+                            id: data.id,
+                            name: data.data().name,
+                            marks: "Error",
                     }
                     this.recordDatas.push(dataPush)
+                    }
+                    else {
+                        let dataPush = {
+                            id: data.id,
+                            name: data.data().name,
+                            marks: data.data().marks,
+                    }
+                    this.recordDatas.push(dataPush)
+                    }
                 })
             })
         },
@@ -152,7 +162,7 @@ export default {
             }
         },
         setMarks() {
-            let prompt = window.prompt("Type a new name to replace the following: "+this.editID+" - "+this.editName)
+            let prompt = window.prompt("Type a new marks to replace the original marks: "+this.editID+" - "+this.editName)
             if (prompt !== null) {
                 let addData = {
                     name: this.editName,

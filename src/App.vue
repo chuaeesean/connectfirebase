@@ -46,8 +46,9 @@
                     <p v-else style="opacity: 80%">Users who have logged in with a Google account will not be able to log in with a Github account with the same email address.</p>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button v-show="loginInfo" @click="signOut()" class="btn btn-outline-success btn-lg">Logout</button>
+                <div class="modal-footer" style="justify-content: center;">
+                  <button v-if="loginInfo" @click="signOut()" class="btn btn-outline-success btn-lg">Logout</button>
+                  <img v-else style="width: 50%" :src="require('./assets/thunder_network.svg')" >
                 </div>
               </div>
             </div>

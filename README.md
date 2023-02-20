@@ -1,12 +1,12 @@
 # connectfirebase
 
-## Version 0.1.6 Update Release Notes
-### Github Login Supported
-Users can now login with their own Github Account. However they should login with the Github Account which is not the same with the Google Account email they had login before. 
+## Version 0.1.7 Update Release Notes
+### Product Image in "About" & "Account" dialog
+We have added the "thunder_network" svg picture in the place that mentioned in the title. 
 
-### Showing Group Creator's email
-Users can now view the group's creator email, whatever they're visible or locked from the public. 
+### Warn for mark error
+User may type the marks using normal text, not numbers. An error sign will appear when they do it. 
 
 ```
-Last Updated: 19/2/2023
+Last Updated: 20/2/2023
 ```
